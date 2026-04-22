@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لحوراتي ❤️</title>
+    <style>
+        body { background: #ffe6f2; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; overflow: hidden; position: relative; }
+        .card { background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px; text-align: center; width: 85%; max-width: 380px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #ff4d94; position: relative; z-index: 10; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 20px; height: 250px; object-fit: contain; background: #fff; }
+        .text-box { background: #ff4d94; color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 19px; font-weight: bold; }
+        .btns { display: flex; justify-content: center; gap: 40px; min-height: 80px; align-items: center; position: relative; }
+        button { background: #ff4d94; color: white; border: none; padding: 12px 25px; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; z-index: 11; }
+        #no-btn { background: #999; position: relative; transition: 0.1s; z-index: 12; }
+        .heart { font-size: 65px; color: #ff4d94; cursor: pointer; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.15);} 100% {transform: scale(1);} }
+        .hearts-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .bouncing-heart { position: absolute; font-size: 24px; color: #ffb3d9; opacity: 0.8; animation: bounce 8s linear infinite; }
+        @keyframes bounce { 0% { transform: translate(0, 0); } 25% { transform: translate(80vw, 30vh); } 50% { transform: translate(0, 80vh); } 75% { transform: translate(-80vw, 30vh); } 100% { transform: translate(0, 0); } }
+    </style>
+</head>
+<body>
+<div class="hearts-container" id="hearts-bg"></div>
+<div class="card" id="main-card">
+    <img id="main-img" src="1.jpg">
+    <div class="text-box" id="main-text">هلو حوراء ❤️</div>
+    <div class="btns" id="btn-area"><button onclick="step2()">هلوو</button></div>
+</div>
+<audio id="myAudio" src="love.mp3" preload="auto"></audio>
+
+<script>
+    const heartsBg = document.getElementById('hearts-bg');
+    for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'bouncing-heart';
+        heart.innerText = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.animationDelay = Math.random() * -8 + 's';
+        heartsBg.appendChild(heart);
+    }
+
+    function step2() {
+        document.getElementById('main-img').src = '2.jpg';
+        document.getElementById('main-text').innerText = 'حوراء عندي سؤال الججج 🫣';
+        document.getElementById('btn-area').innerHTML = '<button onclick="step3()">شنو هو؟</button>';
+    }
+
+    function step3() {
+        document.getElementById('main-img').src = '3.jpg';
+        document.getElementById('main-text').innerText = 'بس مستحية اسألج اياه 😅';
+        document.getElementById('btn-area').innerHTML = '<button onclick="step4()">اسأليي</button>';
+    }
+
+    function step4() {
+        document.getElementById('main-text').innerText = 'تحبين عليش لو لااا؟ ❤️🫣';
+        document.getElementById('btn-area').innerHTML = `
+            <button onclick="finalStep()">اي أحبه كلش ❤️</button>
+            <button id="no-btn" onmouseover="moveNo()" onclick="moveNo()" ontouchstart="moveNo()">لا</button>
+        `;
+    }
+
+    function moveNo() {
+        const btn = document.getElementById('no-btn');
+        btn.style.position = 'fixed';
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        btn.style.left = x + 'px';
+        btn.style.top = y + 'px';
+    }
+
+    function finalStep() {
+        document.getElementById('myAudio').play().catch(() => {});
+        document.getElementById('main-card').innerHTML = `
+            <img src="4.jpg">
+            <div class="text-box" style="background:none; color:#ff4d94;">اذا تحبين عليش دوسي على القلب 🥹❤️</div>
+            <div class="heart" onclick="showLove()">❤️</div>
+        `;
+    }
+
+    function showLove() {
+        document.getElementById('main-card').innerHTML = `
+            <div class="text-box" style="font-size: 16px;">كل عام وانتِ وياي حوراتي احبج اليوم وباجر وطول العمر ❤️🎬</div>
+            <img src="5.jpg">
+            <button onclick="location.reload()" style="background:#555; margin-top:10px;">رجوع</button>
+        `;
+    }
+</script>
+</body>
+</html>
